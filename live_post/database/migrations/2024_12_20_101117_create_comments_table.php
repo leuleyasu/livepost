@@ -13,12 +13,26 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->json('body')->nullable();
+            
+            // Explicitly define the foreign keys
+            $table->foreignId('user_id')
+                  ->references('id')   // Explicitly reference the 'id' column in the 'users' table
+                  ->on('users')         // Specify the 'users' table
+                  ->onDelete('cascade'); // On delete cascade
+            
+            $table->foreignId('post_id')
+                  ->references('id')   // Explicitly reference the 'id' column in the 'posts' table
+                  ->on('posts')         // Specify the 'posts' table
+                  ->onDelete('cascade'); // On delete cascade
+            
             $table->timestamps();
         });
     }
+    
 
     /**
-     * Reverse the migrations.
+     * Reverse the  migrations.
      */
     public function down(): void
     {
