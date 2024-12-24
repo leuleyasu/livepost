@@ -2,41 +2,32 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Comment;
 use App\Models\Post;
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\comment>
- */
+use App\Models\User;
+use Database\Factories\Helpers\FactoryHelper;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
 class CommentFactory extends Factory
 {
     /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Comment::class;
+
+    /**
      * Define the model's default state.
      *
-     * 
-    
-     * @return array<string, mixed>
+     * @return array
      */
-    public function definition(): array
+    public function definition()
     {
-        // Get the count of posts in the database
-        $count = Post::query()->count();
-    
-        // Check if there are posts in the database
-        if ($count == 0) {
-            // If no posts exist, create a new post and get its ID
-            $postId = Post::factory()->create()->id;
-        } else {
-            // If posts exist, select a random post ID
-            $postId = rand(1, $count);
-        }
-    
         return [
-            // You might want to generate some body text, either as an array or string
-            'body' => $this->faker->paragraph, // Using Faker for a random paragraph
-            
-            'user_id' => 1,  // You can randomize this if needed, for example: User::inRandomOrder()->first()->id
-            'post_id' => $postId, // Use the $postId determined above
+            'body' => [],
+            'user_id' => FactoryHelper::getRandomModelId(User::class),
+            'post_id' => FactoryHelper::getRandomModelId(Post::class),
         ];
     }
-    
 }
