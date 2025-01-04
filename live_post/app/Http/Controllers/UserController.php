@@ -13,15 +13,21 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+
+        return new JsonResponse([
+            'data' => "something",
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorepostRequest $request)
-    {
+    public function store()
+    { 
         //
+        return new JsonResponse([
+            "data" => "store",
+        ]);
     }
 
     /**
@@ -31,16 +37,18 @@ class UserController extends Controller
     {
         //
         return new JsonResponse([
-            'data' => "some",
+            'data' => "show",
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatepostRequest $request, post $post)
+    public function update( post $post)
     {
-        //
+        return new JsonResponse([
+            'data' => "update",
+        ]);
     }
 
     /**
@@ -48,6 +56,10 @@ class UserController extends Controller
      */
     public function destroy(post $post)
     {
+
+        return new JsonResponse([
+            'data' => "destroy",
+        ]);
         //
     }
 }
